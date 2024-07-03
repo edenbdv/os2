@@ -26,6 +26,35 @@ implement a synchronization lock for file access, ensuring that only one process
 ## Objective:
 This part extends the project by implementing buffered file I/O with special support for the O_PREAPPEND flag. It involves creating wrappers for standard file operations to achieve buffered reading and writing, ensuring efficient file access and supporting prepending data to files without overriding existing content.
 
+## Example Usage
+```bash
+#include "buffered_open.h"
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    buffered_file_t *bf = buffered_open("example.txt", O_WRONLY | O_CREAT | O_PREAPPEND, 0644);
+    if (!bf) {
+        perror("buffered_open");
+        return 1;
+    }
+
+    const char *text = "Hello, World!";
+    if (buffered_write(bf, text, strlen(text)) == -1) {
+        perror("buffered_write");
+        buffered_close(bf);
+        return 1;
+    }
+
+    if (buffered_close(bf) == -1) {
+        perror("buffered_close");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
 # Part 4: Assignment: Implementing a Directory Copy Library in C
 
 ## Objective:
