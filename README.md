@@ -1,3 +1,10 @@
+
+# Important principles included:
+- Synchronization techniques for file access.
+ - Handling symbolic links and file permissions.
+- Implementing buffered file I/O with custom flags.
+- Recursive directory copying in C.
+
 # Part 1: Advanced Synchronization of File Access with Naive Methods
 
 ## Objective
