@@ -34,7 +34,7 @@ The program forks two child processes and the parent process, each writing speci
 ./part2 "Parent message\n" "Child1 message\n" "Child2 message\n" 3
 ```
 
-Part 3: Buffered File I/O with O_PREAPPEND Flag
+# Part 3: Buffered File I/O with O_PREAPPEND Flag
 Objective:
 This program extends the previous parts by synchronizing file access between parent and child processes using naive methods such as wait or sleep. It explores varied writing patterns and ensures proper file synchronization without complex locking mechanisms.
 
@@ -51,7 +51,7 @@ Example Usage:
 ```bash
 ./part3 "Parent message\n" "Child1 message\n" "Child2 message\n" 3
 ```
-Part 4: Assignment: Implementing a Directory Copy Library in C
+# Part 4: Assignment: Implementing a Directory Copy Library in C
 Objective:
 This program continues exploring file access synchronization between parent and child processes using naive methods like wait or sleep. It focuses on handling varied writing patterns and maintaining file integrity without advanced synchronization tools.
 
