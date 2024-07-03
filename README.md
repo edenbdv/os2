@@ -19,15 +19,7 @@ The program forks two child processes and the parent process, each writing speci
 # Part 2: Assignment: Implementing a Synchronization Lock for File Access
 
 ## Objective
-Similar to Part 1, this program synchronizes file access between parent and child processes using naive methods. It emphasizes proper synchronization without using locks or complex synchronization mechanisms.
-
-## Instructions
-The program forks two child processes and the parent process, each writing specified messages to `output.txt` while preventing interleaved writes using naive synchronization methods.
-
-## Requirements
-- Create `output.txt`.
-- Implement naive synchronization to prevent write interleaving.
-- Accept command-line arguments for messages and write counts.
+implement a synchronization lock for file access, ensuring that only one process writes to the file at a time while the others wait. This assignment will involve creating a dynamic number of child processes and using a separate file as a lock to control access.
 
 ## Example Usage
 ```bash
@@ -35,36 +27,16 @@ The program forks two child processes and the parent process, each writing speci
 ```
 
 # Part 3: Buffered File I/O with O_PREAPPEND Flag
-Objective:
-This program extends the previous parts by synchronizing file access between parent and child processes using naive methods such as wait or sleep. It explores varied writing patterns and ensures proper file synchronization without complex locking mechanisms.
 
-Instructions:
-Fork two child processes and the parent process, with each writing specific messages to output.txt. Naive synchronization methods should prevent write interleaving, maintaining order based on process execution.
+## Objective:
+This part involves creating a wrapper for the original open, write, and read functions to achieve buffered reading and writing, with special handling for the O_PREAPPEND flag.
 
-Requirements:
-
-Create output.txt.
-Use naive synchronization methods to prevent file write interleaving.
-Accept command-line arguments for message content and write counts.
-Example Usage:
-
-```bash
-./part3 "Parent message\n" "Child1 message\n" "Child2 message\n" 3
-```
 # Part 4: Assignment: Implementing a Directory Copy Library in C
-Objective:
-This program continues exploring file access synchronization between parent and child processes using naive methods like wait or sleep. It focuses on handling varied writing patterns and maintaining file integrity without advanced synchronization tools.
 
-Instructions:
-Fork two child processes and the parent process, each writing designated messages to output.txt. Naive synchronization ensures that file writes do not interleave, achieving orderly write sequences.
+## Objective:
+This part implement a C library that provides functionalities similar to Python's shutil.copytree. This library will allow users to copy entire directory trees, including files and subdirectories, from a source location to a destination location, while handling symbolic links and file permissions as specified by flags.
 
-Requirements:
-
-Create output.txt.
-Implement naive synchronization to avoid file write overlap.
-Use command-line arguments to define message content and write counts.
-Example Usage:
-
+## Example Usage
 ```bash
-./part4 "Parent message\n" "Child1 message\n" "Child2 message\n" 3
+./main_program -l -p source_directory destination_directory
 ```
