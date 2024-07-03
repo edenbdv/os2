@@ -6,11 +6,6 @@ This program demonstrates naive file access synchronization between a parent pro
 ## Instructions
 The program forks two child processes and the parent process, each writing specified messages to a file (`output.txt`) a specified number of times. Naive synchronization ensures that writes do not overlap using simple timing mechanisms.
 
-## Requirements
-- Create `output.txt`.
-- Ensure processes write their respective messages sequentially using naive synchronization (e.g., sleep).
-- Use command-line arguments to specify messages and the count of writes.
-
 ## Example Usage
 ```bash
 ./part1 "Parent message\n" "Child1 message\n" "Child2 message\n" 3
@@ -29,12 +24,12 @@ implement a synchronization lock for file access, ensuring that only one process
 # Part 3: Buffered File I/O with O_PREAPPEND Flag
 
 ## Objective:
-This part involves creating a wrapper for the original open, write, and read functions to achieve buffered reading and writing, with special handling for the O_PREAPPEND flag.
+This part extends the project by implementing buffered file I/O with special support for the O_PREAPPEND flag. It involves creating wrappers for standard file operations to achieve buffered reading and writing, ensuring efficient file access and supporting prepending data to files without overriding existing content.
 
 # Part 4: Assignment: Implementing a Directory Copy Library in C
 
 ## Objective:
-This part implement a C library that provides functionalities similar to Python's shutil.copytree. This library will allow users to copy entire directory trees, including files and subdirectories, from a source location to a destination location, while handling symbolic links and file permissions as specified by flags.
+This assignment involves implementing a C library that mimics Python's shutil.copytree. The library allows copying entire directory trees from a source to a destination directory, including handling symbolic links and file permissions based on specified flags.
 
 ## Example Usage
 ```bash
