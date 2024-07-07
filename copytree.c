@@ -15,12 +15,19 @@
 
 void copy_file(const char *src, const char *dest, int copy_symlinks, int copy_permissions) {
 
-    struct stat src_stat;
+    struct stat src_stat, dest_stat;
 
      // Get information about the source file
     if (lstat(src, &src_stat) == -1) {
-        perror("Error getting file information");
+        perror("COMMAND failed");
         return;
+    }
+
+     // Check if the destination file already exists
+    if (stat(dest, &dest_stat) == 0) {
+        perror("COMMAND failed");
+        exit(EXIT_FAILURE);
+
     }
 
     // Open source file for reading
@@ -48,13 +55,13 @@ void copy_file(const char *src, const char *dest, int copy_symlinks, int copy_pe
       // If not copying as symbolic links, read the target file content and copy it
             int target_fd = open(src, O_RDONLY);
             if (target_fd == -1) {
-                perror("Error opening target file");
+              perror("COMMAND failed");
                 return;
             }
 
             int dest_fd = open(dest, O_WRONLY | O_CREAT | O_TRUNC, 0666);
             if (dest_fd == -1) {
-                perror("Error creating destination file");
+               perror("COMMAND failed");
                 close(target_fd);
                 return;
             }
@@ -67,7 +74,8 @@ void copy_file(const char *src, const char *dest, int copy_symlinks, int copy_pe
              
                 bytes_written = write(dest_fd, buffer, bytes_read);
                 if (bytes_written != bytes_read) {
-                    perror("Error writing to destination file");
+                       perror("COMMAND failed");
+
                     close(target_fd);
                     close(dest_fd);
                     return;
@@ -75,7 +83,8 @@ void copy_file(const char *src, const char *dest, int copy_symlinks, int copy_pe
             }
 
             if (bytes_read == -1) {
-                perror("Error reading from target file");
+                  perror("COMMAND failed");
+
                 close(target_fd);
                 close(dest_fd);
                 return;
@@ -234,6 +243,8 @@ void copy_directory(const char *src, const char *dest, int copy_symlinks, int co
 
     // Use 0755 if copy_permissions is not enabled, else use the source directory's permissions
     mode_t mode = copy_permissions ? src_stat.st_mode : 0755;
+
+    
       
 
     // Create the destination directory if it doesn't exist

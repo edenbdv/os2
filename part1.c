@@ -9,6 +9,16 @@
 #include <string.h>
 
 
+// Function to trim newline characters from a string
+void trim_newline(char *str) {
+    int len = strlen(str);
+    while (len > 0 && (str[len - 1] == '\n' || str[len - 1] == '\r')) {
+        str[len - 1] = '\0'; // Replace newline with null terminator
+        len--;
+    }
+}
+
+
 void write_to_file(const char *filename, const char *message, int count) {
     int fd = open(filename, O_WRONLY | O_APPEND);
      if (fd == -1) {
@@ -39,6 +49,11 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Usage: %s <parent_message> <child1_message> <child2_message> <count>\n", argv[0]);
         return 1;
     }
+
+        // Trim newline characters from each message argument
+    trim_newline(argv[1]); // Parent message
+    trim_newline(argv[2]); // Child1 message
+    trim_newline(argv[3]); // Child2 message
 
     char *parent_message = argv[1];
     char *child1_message = argv[2];
