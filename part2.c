@@ -41,7 +41,12 @@ if (argc < 5) {
     const char *lockfile = "lockfile.lock";
     const char *outputfile = "output2.txt";
 
-    int fd = open(outputfile,  O_CREAT| O_WRONLY , S_IRWXU | S_IRWXG | S_IRWXO);
+    // original line:
+    //int fd = open(outputfile,  O_CREAT| O_WRONLY , S_IRWXU | S_IRWXG | S_IRWXO);
+
+    //fixed line:
+    int fd = open(outputfile, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU | S_IRWXG | S_IRWXO);
+
     if (fd == -1) {
     perror(NULL);
     return 1;
@@ -58,7 +63,8 @@ if (argc < 5) {
         //entry (lock)
         acquire_lock(lockfile);
 
-         fd = open(outputfile, O_WRONLY | O_APPEND);
+        fd = open(outputfile, O_WRONLY | O_APPEND);
+         
             if (fd == -1) {
                 perror("Failed to open output file");
                 release_lock(lockfile);
